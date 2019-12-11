@@ -7,7 +7,18 @@ const ArticleList = ({ dispatch, searchResults, currentPaperId }) => {
   let searchHeader = '';
   if (Object.entries(searchResults).length != 0){
     searchHeader = <div><h3>Search Results</h3><br/></div>;
-  } 
+  }
+  let detailsStyle = {
+    backgroundColor: '#d9d9d9',
+    borderRadius: '3px',
+    padding: '15px'
+  };
+  let btnStyle = {
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginBottom: '10px'
+  };
   return(
     <div>
       {searchHeader}
@@ -16,11 +27,16 @@ const ArticleList = ({ dispatch, searchResults, currentPaperId }) => {
         let resultInformation = '';
         if (result.coreId === currentPaperId) {
           resultInformation =
-            <div>
+            <div style={detailsStyle}>
               <p>{result.year}</p>
               <p>{result.description}</p>
-              <a target="_blank" href={result.downloadUrl}>See article</a>
-              <p onClick={() => {dispatch(saveArticle(result))}}>Add To My Articles</p>
+              <a target="_blank" href={result.downloadUrl}><button style={btnStyle} className='waves-effect waves-light btn-small'>See article</button></a>
+              <button 
+                className='waves-effect waves-light btn-small'
+                style={btnStyle}
+                onClick={() => {dispatch(saveArticle(result))}}>
+                Add To My Articles
+              </button>
             </div>;
         }
         return <li 
