@@ -17,7 +17,7 @@ _This app allows the user to enter a search term to browse articles from the COR
 * _In the "yarp" project directory, create a file called ".env"_
 * _Open the .env file and store your API key using the format "API_KEY = your-API-key-here"_
 * _Save the .env file_
-* _From the "yarp" project directory, run the command "npm run start"_
+* _Run the command "npm run start"_
 * _Go to the URL "http://localhost:8080/" in a browser_
 
 ## Technologies Used
