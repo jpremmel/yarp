@@ -3,27 +3,32 @@ import * as types from './../constants/ActionTypes';
 export function fetchSearchResults(search) {
   return function (dispatch) {
     search = search.replace(' ', '_');
-    return fetch('https://core.ac.uk:443/api-v2/articles/search/' + search + '?page=1&pageSize=10&metadata=true&citations=false&similar=false&duplicate=false&urls=false&faithfulMetadata=false&apiKey=4b5w1ZMhAfgeOtQTFURDWVmIuNjoq6kc').then(
+    console.log(process.env.API_KEY);
+    return fetch(`https://core.ac.uk:443/api-v2/articles/search/${search}?page=1&pageSize=10&metadata=true&citations=false&similar=false&duplicate=false&urls=false&faithfulMetadata=false&apiKey=${process.env.API_KEY}`).then(
       response => response.json(),
       error => console.log("Error occurred. ", error)
     ).then(function (json) {
-        if (json.data.length > 0) {
-          let searchResults = {};
-          for (let i = 0; i < json.data.length; i++) {
-            let newArticle = {
-              coreId: json.data[i].id,
-              author: json.data[i].authors[0],
-              title: json.data[i].title,
-              year: json.data[i].year,
-              downloadUrl: json.data[i].downloadUrl,
-              description: json.data[i].description
-            };
-            searchResults = Object.assign({}, searchResults, {
-              [newArticle.coreId]: newArticle
-            });
-          }
-          dispatch(receiveSearchResults(searchResults));
+      if (json.error) {
+        console.log('Error code: ', json.error.code);
+        console.log('Error message: ', json.error.message);
+        dispatch(searchError());
+      } else if (json.data.length > 0) {
+        let searchResults = {};
+        for (let i = 0; i < json.data.length; i++) {
+          let newArticle = {
+            coreId: json.data[i].id,
+            author: json.data[i].authors[0],
+            title: json.data[i].title,
+            year: json.data[i].year,
+            downloadUrl: json.data[i].downloadUrl,
+            description: json.data[i].description
+          };
+          searchResults = Object.assign({}, searchResults, {
+            [newArticle.coreId]: newArticle
+          });
         }
+        dispatch(receiveSearchResults(searchResults));
+      }
       else {
         console.log('No search results.');
         dispatch(searchError());
