@@ -16,7 +16,7 @@ function App(){
   };
   let imgStyle = {
     width: '10%'
-  }
+  };
   return(
     <div style={colStyle}>
       <Header/>
