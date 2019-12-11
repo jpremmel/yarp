@@ -1,8 +1,9 @@
 
 export const initialState = {
-  currentPaperId: 1,
+  currentPaperId: 0,
   papersById: {
     1: {
+      id: 1,
       coreId: '82212740',
       title: 'Cats',
       year: 2004,
@@ -10,6 +11,7 @@ export const initialState = {
       author: 'O\'Brien, Stephen J.'
     },
     2: {
+      id: 2,
       coreId: '10200893',
       title: 'Of feral cats and pet cats',
       year: 2012,

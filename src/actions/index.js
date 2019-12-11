@@ -42,12 +42,17 @@ export const receiveSearchResults = searchResults => ({
   searchResults
 });
 
-export const selectArticle = selectedArticle => ({
+export const selectArticle = selectedArticleId => ({
   type: types.SELECT_ARTICLE,
-  selectedArticle
+  selectedArticleId
 });
 
 export const saveArticle = article => ({
   type: types.SAVE_ARTICLE,
   article
+});
+
+export const removeArticle = id => ({
+  type: types.REMOVE_ARTICLE,
+  id
 });

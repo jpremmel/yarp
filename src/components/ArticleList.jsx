@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { selectArticle } from './../actions';
+import { selectArticle, removeArticle } from './../actions';
 
 const ArticleList = ({ dispatch, articleList, currentPaperId }) => {
   let detailsStyle = {
@@ -22,17 +22,18 @@ const ArticleList = ({ dispatch, articleList, currentPaperId }) => {
       {Object.keys(articleList).map(articleId => {
         let article = articleList[articleId];
         let articleInformation = '';
-        if (article.coreId === currentPaperId) {
+        if (article.id === currentPaperId) {
           articleInformation =
             <div style={detailsStyle}>
               <p>{article.year}</p>
               <p>{article.description}</p>
               <a target="_blank" href={article.downloadUrl}><button style={btnStyle} className='waves-effect waves-light btn-small'>See article</button></a>
+              <button style={btnStyle} className='waves-effect waves-light btn-small' onClick={() => {dispatch(removeArticle(article.id))}}>Remove from My Articles</button>
             </div>;
         }
         return <li 
           key={articleId} 
-          onClick={() => {dispatch(selectArticle(article.coreId));}}>
+          onClick={() => {dispatch(selectArticle(article.id));}}>
           <em>{article.title}</em> by {article.author}{articleInformation}</li>;
       })}
     </div>
