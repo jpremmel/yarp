@@ -9,7 +9,6 @@ const articleListReducer = (state = initialState.papersById, action) => {
       let newId = v4();
       let article = action.article;
       article.id = newId;
-      console.log('SAVING THIS NEW ARTICLE: ', article);
       newState = {...state,
         [newId]: action.article};
       return newState;
