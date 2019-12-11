@@ -4,6 +4,13 @@ import { connect } from 'react-redux';
 import { selectArticle, removeArticle } from './../actions';
 
 const ArticleList = ({ dispatch, articleList, currentPaperId }) => {
+  let noArticlesStyle = {
+    color: '#d9d9d9',
+    textAlign: 'center'
+  };
+  let centerTextStyle = {
+    textAlign: 'center'
+  };
   let detailsStyle = {
     backgroundColor: '#d9d9d9',
     borderRadius: '3px',
@@ -15,10 +22,15 @@ const ArticleList = ({ dispatch, articleList, currentPaperId }) => {
     marginRight: 'auto',
     marginBottom: '10px'
   };
+  let header;
+  if (Object.entries(articleList).length != 0) {
+    header = <div><h3 style={centerTextStyle}>My Articles</h3><br/></div>;
+  } else {
+    header = <h4 style={noArticlesStyle}>No articles yet</h4>;
+  }
   return(
     <div>
-      <h3>My Articles</h3>
-      <br/>
+      {header}
       {Object.keys(articleList).map(articleId => {
         let article = articleList[articleId];
         let articleInformation = '';

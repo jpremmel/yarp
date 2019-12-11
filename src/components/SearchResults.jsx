@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 import { selectArticle, saveArticle } from './../actions';
 
 const ArticleList = ({ dispatch, searchResults, currentPaperId }) => {
-  let searchHeader = '';
-  if (Object.entries(searchResults).length != 0){
-    searchHeader = <div><h3>Search Results</h3><br/></div>;
-  }
   let detailsStyle = {
     backgroundColor: '#d9d9d9',
     borderRadius: '3px',
@@ -19,6 +15,13 @@ const ArticleList = ({ dispatch, searchResults, currentPaperId }) => {
     marginRight: 'auto',
     marginBottom: '10px'
   };
+  let centerTextStyle = {
+    textAlign: 'center'
+  };
+  let searchHeader = '';
+  if (Object.entries(searchResults).length != 0){
+    searchHeader = <div><h3 style={centerTextStyle}>Search Results</h3><br/></div>;
+  }
   return(
     <div>
       {searchHeader}
